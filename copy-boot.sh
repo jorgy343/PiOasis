@@ -1,6 +1,8 @@
 #!/bin/bash
 
-mount /dev/sdb test
-cp source/bin/boot.bin test/armstub8.bin
+mkdir temp
+mount /dev/sdb temp
+cp source/bin/boot.bin temp/armstub8.bin
 sync
-umount test
+umount temp
+rm -rfd temp
