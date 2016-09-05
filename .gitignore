@@ -1,0 +1,4 @@
+pi-oasis-image.img
+/compilers/*
+/source/obj/*
+/source/bin/*
