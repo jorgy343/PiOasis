@@ -2,5 +2,5 @@
 /test/*
 /temp/*
 /compilers/*
-/source/obj/*
-/source/bin/*
+/source/*/obj/*
+/source/*/bin/*
