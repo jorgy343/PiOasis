@@ -2,7 +2,7 @@
 
 DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
 
-export PATH=$DIR/../compilers/aarch64-linux-gnu/bin:$PATH
+export PATH=$DIR/../../../compilers/aarch64-linux-gnu/bin:$PATH
 
 mkdir -p obj
 mkdir -p bin

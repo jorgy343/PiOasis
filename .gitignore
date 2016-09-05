@@ -1,4 +1,6 @@
-pi-oasis-image.img
+/pi-oasis-image-base.img
+/test/*
+/temp/*
 /compilers/*
 /source/obj/*
 /source/bin/*
