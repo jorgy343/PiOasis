@@ -9,7 +9,7 @@ mkdir -p bin
 
 rm -f obj/*
 
-aarch64-linux-gnu-gcc -c boot.s -o obj/boot.o
+aarch64-linux-gnu-as -c boot.s -o obj/boot.o
 aarch64-linux-gnu-ld --section-start=.text=0 obj/boot.o -o obj/boot.elf
 aarch64-linux-gnu-objcopy obj/boot.elf -O binary obj/boot.tmp
 
