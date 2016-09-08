@@ -2,7 +2,7 @@ SEARCH_DIR(obj)
 
 SECTIONS
 {
-	. = 0x8000;
+	. = 0x80000;
 	.text :
 	{
 		start.o(.text)

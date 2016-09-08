@@ -1,9 +1,8 @@
-
-.globl _start
 _start:
-    ldr x0, =0x00100000
-    mov sp, x0
-    bl main
+    movz x6, 0x0
+    movk x6, 0x1000, LSL 16
+    mov sp, x6
+    b main
 
 hang:
     wfe
