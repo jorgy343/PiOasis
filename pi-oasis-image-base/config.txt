@@ -1,1 +1,2 @@
 dtparam=audio=on
+enable_uart=1
