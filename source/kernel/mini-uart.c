@@ -2,25 +2,25 @@
 
 struct MiniUartRegisterView* MiniUartRegisters = (struct MiniUartRegisterView*)MiniUartRegisterViewBase;
 
-bool CanReadFromMiniUart()
+bool MiniUartCanRead()
 {
     return MiniUartRegisters->LineStatus & bit(0);
 }
 
-bool CanWriteToMiniUart()
+bool MiniUartCanWrite()
 {
     return MiniUartRegisters->LineStatus & bit(5);
 }
 
-char ReadMiniUartChar()
+char MiniUartReadChar()
 {
-    while (!CanReadFromMiniUart());
+    while (!MiniUartCanRead());
     return MiniUartRegisters->IoData & 0xff; // Masking might not be necessary.
 }
 
 void MiniUartWriteChar(char data)
 {
-    while (!CanWriteToMiniUart());
+    while (!MiniUartCanWrite());
     
     uint32_t value = MiniUartRegisters->IoData;
     value = (value & 0xffffff00) | data; // Masking might not be necessary.

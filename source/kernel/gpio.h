@@ -76,11 +76,78 @@ enum GpioFunction
     GpioFunctionAlternate3
 };
 
+enum GpioPinLevel
+{
+    GpioPinLow,
+    GpioPinHigh
+};
+
+enum GpioPin
+{
+    GpioPin0,
+    GpioPin1,
+    GpioPin2,
+    GpioPin3,
+    GpioPin4,
+    GpioPin5,
+    GpioPin6,
+    GpioPin7,
+    GpioPin8,
+    GpioPin9,
+    GpioPin10,
+    GpioPin11,
+    GpioPin12,
+    GpioPin13,
+    GpioPin14,
+    GpioPin15,
+    GpioPin16,
+    GpioPin17,
+    GpioPin18,
+    GpioPin19,
+    GpioPin20,
+    GpioPin21,
+    GpioPin22,
+    GpioPin23,
+    GpioPin24,
+    GpioPin25,
+    GpioPin26,
+    GpioPin27,
+    GpioPin28,
+    GpioPin29,
+    GpioPin30,
+    GpioPin31,
+    GpioPin32,
+    GpioPin33,
+    GpioPin34,
+    GpioPin35,
+    GpioPin36,
+    GpioPin37,
+    GpioPin38,
+    GpioPin39,
+    GpioPin40,
+    GpioPin41,
+    GpioPin42,
+    GpioPin43,
+    GpioPin44,
+    GpioPin45,
+    GpioPin46,
+    GpioPin47,
+    GpioPin48,
+    GpioPin49,
+    GpioPin50,
+    GpioPin51,
+    GpioPin52,
+    GpioPin53
+};
+
 extern struct GpioRegisterView* GpioRegisters;
 
-void GpioSetPinFunction(uint32_t pin, enum GpioFunction function);
+enum GpioFunction GpioGetPinFunction(enum GpioPin pin);
+void GpioSetPinFunction(enum GpioPin pin, enum GpioFunction function);
 
-void GpioSetPinOutput(uint32_t pin);
-void GpioClearPinOutput(uint32_t pin);
+void GpioSetPinOutput(enum GpioPin pin);
+void GpioClearPinOutput(enum GpioPin pin);
+
+enum GpioPinLevel GpioGetPinLevel(enum GpioPin pin);
 
 #endif

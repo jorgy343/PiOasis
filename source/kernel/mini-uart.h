@@ -23,10 +23,10 @@ struct MiniUartRegisterView
 
 extern struct MiniUartRegisterView* MiniUartRegisters;
 
-bool CanReadFromMiniUart();
-bool CanWriteToMiniUart();
+bool MiniUartCanRead();
+bool MiniUartCanWrite();
 
-char ReadMiniUartChar();
+char MiniUartReadChar();
 void MiniUartWriteChar(char data);
 void MiniUartWriteString(const char* string);
 
