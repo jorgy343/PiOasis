@@ -1,5 +1,3 @@
-#include <stdint.h>
-
 #include "standard.h"
 #include "mini-uart.h"
 #include "gpio.h"

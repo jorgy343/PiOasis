@@ -1,12 +1,11 @@
 #ifndef MINI_UART_H
 #define MINI_UART_H
 
-#include <stdint.h>
 #include "standard.h"
 
 #define MiniUartRegisterViewBase 0x3f215040
 
-struct MiniUartRegisterView
+typedef struct
 {
     volatile uint32_t IoData;
     volatile uint32_t InterruptEnable;
@@ -19,9 +18,9 @@ struct MiniUartRegisterView
     volatile uint32_t ExtraControl;
     volatile uint32_t ExtraStatus;
     volatile uint32_t Baudrate;
-};
+} MiniUartRegisterView;
 
-extern struct MiniUartRegisterView* MiniUartRegisters;
+extern MiniUartRegisterView* MiniUartRegisters;
 
 bool MiniUartCanRead();
 bool MiniUartCanWrite();

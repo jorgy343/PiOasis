@@ -1,12 +1,11 @@
 #ifndef GPIO_H
 #define GPIO_H
 
-#include <stdint.h>
 #include "standard.h"
 
 #define GpioRegisterViewBase 0x3f200000
 
-struct GpioRegisterView
+typedef struct
 {
     uint32_t FunctionSelect0;
     uint32_t FunctionSelect1;
@@ -62,9 +61,9 @@ struct GpioRegisterView
     uint32_t reserved11;
 
     uint32_t Test;
-};
+} GpioRegisterView;
 
-enum GpioFunction
+typedef enum
 {
     GpioFunctionInput,
     GpioFunctionOutput,
@@ -74,15 +73,15 @@ enum GpioFunction
     GpioFunctionAlternate1,
     GpioFunctionAlternate2,
     GpioFunctionAlternate3
-};
+} GpioFunction;
 
-enum GpioPinLevel
+typedef enum
 {
     GpioPinLow,
     GpioPinHigh
-};
+} GpioPinLevel;
 
-enum GpioPin
+typedef enum
 {
     GpioPin0,
     GpioPin1,
@@ -138,16 +137,16 @@ enum GpioPin
     GpioPin51,
     GpioPin52,
     GpioPin53
-};
+} GpioPin;
 
-extern struct GpioRegisterView* GpioRegisters;
+extern GpioRegisterView* GpioRegisters;
 
-enum GpioFunction GpioGetPinFunction(enum GpioPin pin);
-void GpioSetPinFunction(enum GpioPin pin, enum GpioFunction function);
+GpioFunction GpioGetPinFunction(GpioPin pin);
+void GpioSetPinFunction(GpioPin pin, GpioFunction function);
 
-void GpioSetPinOutput(enum GpioPin pin);
-void GpioClearPinOutput(enum GpioPin pin);
+GpioPinLevel GpioGetPinLevel(GpioPin pin);
 
-enum GpioPinLevel GpioGetPinLevel(enum GpioPin pin);
+void GpioSetPinOutput(GpioPin pin);
+void GpioClearPinOutput(GpioPin pin);
 
 #endif

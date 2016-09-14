@@ -1,9 +1,10 @@
 #ifndef STANDARD_H
 #define STANDARD_H
 
-#define bool int
-#define true 1
-#define false 0
+// Standard includes used throughout the kernel code.
+#include <stddef.h>
+#include <stdint.h>
+#include <stdbool.h>
 
 #define bit(x) (1 << (x))
 

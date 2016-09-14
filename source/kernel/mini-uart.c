@@ -1,6 +1,6 @@
 #include "mini-uart.h"
 
-struct MiniUartRegisterView* MiniUartRegisters = (struct MiniUartRegisterView*)MiniUartRegisterViewBase;
+MiniUartRegisterView* MiniUartRegisters = (MiniUartRegisterView*)MiniUartRegisterViewBase;
 
 bool MiniUartCanRead()
 {
