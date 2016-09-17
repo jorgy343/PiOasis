@@ -65,7 +65,11 @@ void* HeapAllocate(uint64_t requestedSize)
 
 void HeapFree(void* memory)
 {
+    // The parameter specifies the start of the data which is right after the header. Subtract
+    // the size of the header from the pointer to get a pointer to the start of the header.
+    memory = (void*)((uintptr_t)memory - sizeof(HeapHeader));
     HeapHeader* header = (HeapHeader*)memory;
+    
     if (header->Previous != NULL && header->Previous->IsFree
         && header->Next != NULL && header->Next->IsFree)
     {
