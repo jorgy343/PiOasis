@@ -26,7 +26,13 @@ bool MiniUartCanRead();
 bool MiniUartCanWrite();
 
 char MiniUartReadChar();
-void MiniUartWriteChar(char data);
-void MiniUartWriteString(const char* string);
+
+void MiniUartWriteChar(char value);
+void MiniUartWriteString(const char* value);
+
+void MiniUartWriteBool(bool value);
+void MiniUartWriteHex4(uint32_t value); // Writes out the first four bits of the integer.
+void MiniUartWriteHex32(uint32_t value);
+void MiniUartWriteHex64(uint64_t value);
 
 #endif

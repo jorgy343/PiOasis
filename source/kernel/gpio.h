@@ -7,60 +7,60 @@
 
 typedef struct
 {
-    uint32_t FunctionSelect0;
-    uint32_t FunctionSelect1;
-    uint32_t FunctionSelect2;
-    uint32_t FunctionSelect3;
-    uint32_t FunctionSelect4;
-    uint32_t FunctionSelect5;
-    uint32_t Reserved0;
+    volatile uint32_t FunctionSelect0;
+    volatile uint32_t FunctionSelect1;
+    volatile uint32_t FunctionSelect2;
+    volatile uint32_t FunctionSelect3;
+    volatile uint32_t FunctionSelect4;
+    volatile uint32_t FunctionSelect5;
+    volatile uint32_t Reserved0;
 
-    uint32_t PinOutputSet0;
-    uint32_t PinOutputSet1;
-    uint32_t Reserved1;
+    volatile uint32_t PinOutputSet0;
+    volatile uint32_t PinOutputSet1;
+    volatile uint32_t Reserved1;
 
-    uint32_t PinOutputClear0;
-    uint32_t PinOutputClear1;
-    uint32_t Reserved2;
+    volatile uint32_t PinOutputClear0;
+    volatile uint32_t PinOutputClear1;
+    volatile uint32_t Reserved2;
 
-    uint32_t PinLevel0;
-    uint32_t PinLevel1;
-    uint32_t Reserved3;
+    volatile uint32_t PinLevel0;
+    volatile uint32_t PinLevel1;
+    volatile uint32_t Reserved3;
 
-    uint32_t PinEventDetectStatus0;
-    uint32_t PinEventDetectStatus1;
-    uint32_t Reserved4;
+    volatile uint32_t PinEventDetectStatus0;
+    volatile uint32_t PinEventDetectStatus1;
+    volatile uint32_t Reserved4;
 
-    uint32_t PinRisingEdgeDetectEnable0;
-    uint32_t PinRisingEdgeDetectEnable1;
-    uint32_t Reserved5;
+    volatile uint32_t PinRisingEdgeDetectEnable0;
+    volatile uint32_t PinRisingEdgeDetectEnable1;
+    volatile uint32_t Reserved5;
 
-    uint32_t PinFallingEdgeDetectEnable0;
-    uint32_t PinFallingEdgeDetectEnable1;
-    uint32_t Reserved6;
+    volatile uint32_t PinFallingEdgeDetectEnable0;
+    volatile uint32_t PinFallingEdgeDetectEnable1;
+    volatile uint32_t Reserved6;
 
-    uint32_t PinHighDetectEnable0;
-    uint32_t PinHighDetectEnable1;
-    uint32_t Reserved7;
+    volatile uint32_t PinHighDetectEnable0;
+    volatile uint32_t PinHighDetectEnable1;
+    volatile uint32_t Reserved7;
 
-    uint32_t PinLowDetectEnable0;
-    uint32_t PinLowDetectEnable1;
-    uint32_t Reserved8;
+    volatile uint32_t PinLowDetectEnable0;
+    volatile uint32_t PinLowDetectEnable1;
+    volatile uint32_t Reserved8;
 
-    uint32_t PinAsyncRisingEdgeDetect0;
-    uint32_t PinAsyncRisingEdgeDetect1;
-    uint32_t Reserved9;
+    volatile uint32_t PinAsyncRisingEdgeDetect0;
+    volatile uint32_t PinAsyncRisingEdgeDetect1;
+    volatile uint32_t Reserved9;
 
-    uint32_t PinAsyncFallingEdgeDetect0;
-    uint32_t PinAsyncFallingEdgeDetect1;
-    uint32_t Reserved10;
+    volatile uint32_t PinAsyncFallingEdgeDetect0;
+    volatile uint32_t PinAsyncFallingEdgeDetect1;
+    volatile uint32_t Reserved10;
 
-    uint32_t PinPullUpDownEnable;
-    uint32_t PinPullUpDownEnableClock0;
-    uint32_t PinPullUpDownEnableClock1;
-    uint32_t reserved11;
+    volatile uint32_t PinPullUpDownEnable;
+    volatile uint32_t PinPullUpDownEnableClock0;
+    volatile uint32_t PinPullUpDownEnableClock1;
+    volatile uint32_t reserved11;
 
-    uint32_t Test;
+    volatile uint32_t Test;
 } GpioRegisterView;
 
 typedef enum

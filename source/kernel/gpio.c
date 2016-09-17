@@ -2,7 +2,7 @@
 
 GpioRegisterView* GpioRegisters = (GpioRegisterView*)GpioRegisterViewBase;
 
-GpioFunction SafeGetFunction(GpioPin pin, uint32_t* registerBase)
+GpioFunction SafeGetFunction(GpioPin pin, volatile uint32_t* registerBase)
 {
     if (pin < 0 || pin > 53)
         return -1;
@@ -13,7 +13,7 @@ GpioFunction SafeGetFunction(GpioPin pin, uint32_t* registerBase)
     return *registerBase & (0x7 << (pin * 3));
 }
 
-void SafeSetFunction(GpioPin pin, GpioFunction function, uint32_t* registerBase)
+void SafeSetFunction(GpioPin pin, GpioFunction function, volatile uint32_t* registerBase)
 {
     if (pin < 0 || pin > 53)
         return;
@@ -30,7 +30,7 @@ void SafeSetFunction(GpioPin pin, GpioFunction function, uint32_t* registerBase)
     *registerBase |= (function << (pin * 3));
 }
 
-GpioPinLevel SafeGetPin(GpioPin pin, uint32_t* register0, uint32_t* register1)
+GpioPinLevel SafeGetPin(GpioPin pin, volatile uint32_t* register0, volatile uint32_t* register1)
 {
     if (pin < 0 || pin > 53)
         return -1;
@@ -41,7 +41,7 @@ GpioPinLevel SafeGetPin(GpioPin pin, uint32_t* register0, uint32_t* register1)
     return *register1 & bit(pin - 32);
 }
 
-void SafeSetPin(GpioPin pin, uint32_t* register0, uint32_t* register1)
+void SafeSetPin(GpioPin pin, volatile uint32_t* register0, volatile uint32_t* register1)
 {
     if (pin < 0 || pin > 53)
         return;
