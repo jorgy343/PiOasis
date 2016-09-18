@@ -1,18 +1,36 @@
-CC = ../../compilers/aarch64-none-elf/bin/aarch64-none-elf-gcc
-LD = ../../compilers/aarch64-none-elf/bin/aarch64-none-elf-ld
-OBJCOPY = ../../compilers/aarch64-none-elf/bin/aarch64-none-elf-objcopy
-OBJDUMP = ../../compilers/aarch64-none-elf/bin/aarch64-none-elf-objdump
+CC = aarch64-none-elf-gcc
+LD = aarch64-none-elf-ld
+AS = aarch64-none-elf-as
+OBJCOPY = aarch64-none-elf-objcopy
+OBJDUMP = aarch64-none-elf-objdump
+OBJ = obj
+BIN = bin
+
+LDFILE = linker.ld
 
 CFLAGS = -Wall -ffreestanding -nostartfiles
-OBJ = obj/start.o obj/kernel.o obj/mini-uart.o obj/gpio.o obj/heap.o
 
-all: bin/kernel.bin
+SRCFILES = start.S kernel.c mini-uart.c gpio.c heap.c
+OBJFILES = $(addprefix $(OBJ)/, $(patsubst %.c,%.o,$(SRCFILES:.S=.o)))
 
-%.o: %.S %.o
-	$(CC) $(CFLAGS) -c -o $@ $<
+all: dirs $(BIN)/kernel.bin
 
-obj/kernel.elf: $(OBJ)
-	$(LD) -T linker.ld -o $@ $^
-
-bin/kernel.bin: obj/kernel.elf
+$(BIN)/kernel.bin: $(OBJ)/kernel.elf
 	$(OBJCOPY) $< -O binary $@
+
+$(OBJ)/kernel.elf: $(OBJFILES)
+	$(LD) -T $(LDFILE) -o $@ $^
+
+$(OBJ)/%.o: %.c
+	$(CC) $(CFLAGS) -c $< -o $@
+
+$(OBJ)/%.o: %.S
+	$(CC) $(CFLAGS) -c $< -o $@
+
+dirs:
+	mkdir obj
+	mkdir bin
+
+clean:
+	rm -rf bin
+	rm -rf obj
