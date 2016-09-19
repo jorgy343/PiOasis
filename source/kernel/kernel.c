@@ -5,7 +5,7 @@
 
 void InitializeHeap()
 {
-    HeapBase->Length = 40 - 32;
+    HeapBase->Length = 0x20000 - 32;
     HeapBase->IsFree = true;
     HeapBase->Previous = NULL;
     HeapBase->Next = NULL;
@@ -36,9 +36,20 @@ void main()
     GpioSetPinFunction(GpioPin2, GpioFunctionOutput);
     GpioSetPinOutput(GpioPin2);
 
-    InitializeHeap();
     MiniUartWriteString("Mini Uart initialized\r\n\r\n");
-
+    InitializeHeap();
+    
+    MiniUartWriteString("Checkpoint 0\r\n");
+    
+    HeapAllocate(8);
+    void* test = HeapAllocate(8);
+    void* test2 = HeapAllocate(8);
+    
+    MiniUartWriteString("Checkpoint 1\r\n");
+    
+    HeapFree(test);
+    HeapFree(test2);
+    
     while (true)
     {
         char value = MiniUartReadChar();

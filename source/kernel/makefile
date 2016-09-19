@@ -3,14 +3,14 @@ LD = aarch64-none-elf-ld
 AS = aarch64-none-elf-as
 OBJCOPY = aarch64-none-elf-objcopy
 OBJDUMP = aarch64-none-elf-objdump
+
+CFLAGS = -Wall -ffreestanding -nostartfiles
+LDFILE = linker.ld
+
 OBJ = obj
 BIN = bin
 
-LDFILE = linker.ld
-
-CFLAGS = -Wall -ffreestanding -nostartfiles
-
-SRCFILES = start.S kernel.c mini-uart.c gpio.c heap.c
+SRCFILES = start.S exception-table-el2.S kernel.c mini-uart.c gpio.c heap.c
 OBJFILES = $(addprefix $(OBJ)/, $(patsubst %.c,%.o,$(SRCFILES:.S=.o)))
 
 all: dirs $(BIN)/kernel.bin
@@ -28,8 +28,8 @@ $(OBJ)/%.o: %.S
 	$(CC) $(CFLAGS) -c $< -o $@
 
 dirs:
-	mkdir obj
-	mkdir bin
+	mkdir -p obj
+	mkdir -p bin
 
 clean:
 	rm -rf bin
