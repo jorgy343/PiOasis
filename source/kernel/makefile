@@ -4,13 +4,13 @@ AS = aarch64-none-elf-as
 OBJCOPY = aarch64-none-elf-objcopy
 OBJDUMP = aarch64-none-elf-objdump
 
-CFLAGS = -Wall -ffreestanding -nostartfiles -nostdlib
+CFLAGS = -O0 -Wall -ffreestanding -nostartfiles -nostdlib -I ../../newlib/newlib-source/newlib/libc/include
 LDFILE = linker.ld
 
 OBJ = obj
 BIN = bin
 
-SRCFILES = start.S exception-table-el2.S kernel.c mini-uart.c gpio.c heap.c
+SRCFILES = start.S exception-table-el2.S kernel.c mini-uart.c gpio.c heap.c newlib-system-calls.c
 OBJFILES = $(addprefix $(OBJ)/, $(patsubst %.c,%.o,$(SRCFILES:.S=.o)))
 
 all: dirs $(BIN)/kernel.bin
@@ -19,7 +19,7 @@ $(BIN)/kernel.bin: $(OBJ)/kernel.elf
 	$(OBJCOPY) $< -O binary $@
 
 $(OBJ)/kernel.elf: $(OBJFILES)
-	$(LD) -T $(LDFILE) -o $@ $^
+	$(CC) $(CFLAGS) -T $(LDFILE) -o $@ $^ ../../newlib/aarch64-none-elf/newlib/libc.a -lgcc
 
 $(OBJ)/%.o: %.c
 	$(CC) $(CFLAGS) -c $< -o $@

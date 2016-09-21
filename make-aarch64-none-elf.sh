@@ -31,7 +31,10 @@ cd ../build-gcc/
 ../gcc-6.2.0/configure --target=aarch64-none-elf --prefix="$DIR" --disable-nls --enable-languages=c,c++ --without-headers --disable-multilib
 
 make -j4 all-gcc
+make -j4 all-target-libgcc
+
 make install-gcc
+make install-target-libgcc
 
 cd "$DIR/"
 rm -rf build

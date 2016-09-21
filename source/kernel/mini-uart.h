@@ -2,6 +2,7 @@
 #define MINI_UART_H
 
 #include "standard.h"
+#include "gpio.h"
 
 #define MiniUartRegisterViewBase 0x3f215040
 

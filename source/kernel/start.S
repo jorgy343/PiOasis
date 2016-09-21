@@ -62,9 +62,8 @@ secondaryCpus:
     
 primaryCpu:
     // Setup the stack.
-    movz x6, 0x0
-    movk x6, 0x1000, lsl 16
-    mov sp, x6
+    movz x0, 0xc, lsl 16
+    mov sp, x0
 
     // Jump to the kernel's main method.
     b main
@@ -74,11 +73,3 @@ hang:
     b hang
 
 .ltorg
-
-.org 0xf0
-magicValue:
-    .word 0x5afe570b
-
-.org 0xf4
-stubVersion:
-    .word 0

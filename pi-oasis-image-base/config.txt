@@ -2,4 +2,5 @@ dtparam=audio=on
 enable_uart=1
 kernel_old=1
 kernel_address=0x0
-device_tree_address=0x10000
+device_tree_address=0x20000
+disable_commandline_tags=1
