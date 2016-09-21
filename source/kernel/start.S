@@ -53,12 +53,11 @@ secondaryCpus:
 primaryCpu:
     // Setup the stack.
     movz x6, 0x0
-    movk x6, 0x1000, lsl 16
+    movk x6, 0x8000, lsl 16
     mov sp, x6
 
     // Jump to the kernel's main method.
-    mov x0, main
-    br x0
+    b main
     
 hang: 
     wfe
