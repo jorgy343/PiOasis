@@ -4,6 +4,7 @@
 #define localPrescaler  0x40000008
 #define oscFreq         19200000
 
+.global _start
 _start:
     mov x0, localControl
     str wzr, [x0]
@@ -56,7 +57,8 @@ primaryCpu:
     mov sp, x6
 
     // Jump to the kernel's main method.
-    b main
+    mov x0, main
+    br x0
     
 hang: 
     wfe

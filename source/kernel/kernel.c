@@ -31,21 +31,19 @@ void PrintHeapHeader(HeapHeader* header)
     MiniUartWriteString("\r\n\r\n");
 }
 
+
 void main()
 {
     GpioSetPinFunction(GpioPin2, GpioFunctionOutput);
     GpioSetPinOutput(GpioPin2);
 
-    MiniUartWriteString("Mini Uart initialized\r\n\r\n");
-    InitializeHeap();
+    MiniUartWriteString("Mini Uart initialized\r\n");
     
-    MiniUartWriteString("Checkpoint 0\r\n");
+    InitializeHeap();
     
     HeapAllocate(8);
     void* test = HeapAllocate(8);
     void* test2 = HeapAllocate(8);
-    
-    MiniUartWriteString("Checkpoint 1\r\n");
     
     HeapFree(test);
     HeapFree(test2);

@@ -4,7 +4,7 @@ AS = aarch64-none-elf-as
 OBJCOPY = aarch64-none-elf-objcopy
 OBJDUMP = aarch64-none-elf-objdump
 
-CFLAGS = -Wall -ffreestanding -nostartfiles
+CFLAGS = -Wall -ffreestanding -nostartfiles -nostdlib
 LDFILE = linker.ld
 
 OBJ = obj
