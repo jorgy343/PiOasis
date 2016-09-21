@@ -1,3 +1,13 @@
+/* Sets PGIO 2 to high.
+mov w0, 0x40
+mov x1, 0x3f200000
+str w0, [x1]
+mov w0, 0x4
+movz x1, 0x001c
+movk x1, 0x3f20, lsl 16
+str w0, [x1]
+*/
+
 #define bit(x) (1 << x)
 
 #define localControl    0x40000000
@@ -34,7 +44,7 @@ _start:
     
     ldr x0, =0x30c50830
     msr sctlr_el2, x0
-    
+
     mov x0, 0x3c9 // spsr
     msr spsr_el3, x0
     adr x0, el2
@@ -53,7 +63,7 @@ secondaryCpus:
 primaryCpu:
     // Setup the stack.
     movz x6, 0x0
-    movk x6, 0x8000, lsl 16
+    movk x6, 0x1000, lsl 16
     mov sp, x6
 
     // Jump to the kernel's main method.

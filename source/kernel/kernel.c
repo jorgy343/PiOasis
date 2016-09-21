@@ -31,7 +31,6 @@ void PrintHeapHeader(HeapHeader* header)
     MiniUartWriteString("\r\n\r\n");
 }
 
-
 void main()
 {
     GpioSetPinFunction(GpioPin2, GpioFunctionOutput);
