@@ -11,11 +11,11 @@ void main()
     GpioSetPinFunction(GpioPin2, GpioFunctionOutput);
     GpioSetPinOutput(GpioPin2);
     
-    void* ptr = (void*)0xa00000;
+    MiniUartWriteString("Mini uart initialized\r\n");
 
-    MiniUartWriteChar('d');
-    memset(ptr, '-', 5);
-    MiniUartWriteChar('e');
+    // Unaligned memory access exception on purpose.
+    int* t = (int*)0x1;
+    int q = *t;
 
     while (true);
 }

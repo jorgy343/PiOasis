@@ -11,7 +11,7 @@ LDFILE = linker.ld
 OBJ = obj
 BIN = bin
 
-SRCFILES = start.S exception-table-el2.S kernel.c mini-uart.c gpio.c newlib-system-calls.c
+SRCFILES = start.S exception-table.S kernel.c mini-uart.c gpio.c newlib-system-calls.c handle-exceptions.c
 OBJFILES = $(addprefix $(OBJ)/, $(patsubst %.c,%.o,$(SRCFILES:.S=.o)))
 
 all: clean dirs $(BIN)/kernel.bin
@@ -20,7 +20,7 @@ $(BIN)/kernel.bin: $(OBJ)/kernel.elf
 	$(OBJCOPY) $< -O binary $@
 
 $(OBJ)/kernel.elf: $(OBJFILES)
-	$(CC) $(LDFLAGS) -T $(LDFILE) -o $@ $^ ../newlib/libc.a
+	$(LD) -T $(LDFILE) -o $@ $^ ../newlib/libc.a
 
 $(OBJ)/%.o: %.c
 	$(CC) $(CFLAGS) -c $< -o $@

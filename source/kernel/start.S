@@ -66,8 +66,13 @@ primaryCpu:
     ldr x0, =_stackStart
     mov sp, x0
 
+    // Setup the exception vector for EL2.
+    mov x0, 0x200
+    lsl x0, x0, 11
+    msr vbar_el2, x0
+
     // Jump to the kernel's main method.
-    b main
+    bl main
     
 hang: 
     wfe

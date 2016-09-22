@@ -5,9 +5,22 @@ SECTIONS
      * addressable byte for the kernel is 0x1ffff.
      */
     . = 0x0;
-    .text :
+    .boot :
     {
         obj/start.o(.text)
+        obj/start.o(*)
+    }
+
+    . = 0x200;
+    .exceptiontable :
+    {
+        obj/exception-table.o(.text)
+        obj/exception-table.o(*)
+    }
+
+    . = ALIGN(16);
+    .text :
+    {
         *(.text)
     }
 
@@ -53,7 +66,7 @@ SECTIONS
     _heapStart = .;
 
     /* Sections we don't need. */
-    /DISCARD/ : { *(.iplt*) }
-    /DISCARD/ : { *(.rela*) }
-    /DISCARD/ : { *(.igot*) }
+    /DISCARD/ : { *(*.iplt*) }
+    /DISCARD/ : { *(*.rela*) }
+    /DISCARD/ : { *(*.igot*) }
 }

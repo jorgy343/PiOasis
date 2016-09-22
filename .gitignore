@@ -1,5 +1,6 @@
 *.swp
 
+/qemu/*
 /newlib/*
 /pi-oasis-image-base.img
 /test/*
