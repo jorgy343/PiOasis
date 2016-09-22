@@ -47,11 +47,11 @@ _start:
 
     mov x0, 0x3c9 // spsr
     msr spsr_el3, x0
-    adr x0, el2
+    adr x0, el1
     msr elr_el3, x0
     eret
     
-el2:
+el1:
     mrs x0, mpidr_el1
     and x0, x0, 0x3
     cbz x0, primaryCpu
@@ -69,7 +69,7 @@ primaryCpu:
     // Setup the exception vector for EL2.
     mov x0, 0x200
     lsl x0, x0, 11
-    msr vbar_el2, x0
+    msr vbar_el1, x0
 
     // Jump to the kernel's main method.
     bl main
