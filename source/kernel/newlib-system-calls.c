@@ -35,7 +35,6 @@ int _read(int file, char* ptr, int len)
 
 int _write(int file, char* ptr, int len)
 {
-    MiniUartWriteChar('t');
     for (int i = 0; i < len; ++i)
         MiniUartWriteChar(ptr[i]);
 

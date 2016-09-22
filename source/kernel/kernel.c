@@ -1,4 +1,4 @@
-#include <stdio.h>
+#include <string.h>
 
 #include "standard.h"
 #include "mini-uart.h"
@@ -11,8 +11,11 @@ void main()
     GpioSetPinFunction(GpioPin2, GpioFunctionOutput);
     GpioSetPinOutput(GpioPin2);
     
+    void* ptr = (void*)0xa00000;
+
     MiniUartWriteChar('d');
-    puts("sdf");
+    memset(ptr, '-', 5);
+    MiniUartWriteChar('e');
 
     while (true);
 }

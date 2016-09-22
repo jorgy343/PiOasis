@@ -62,7 +62,8 @@ secondaryCpus:
     
 primaryCpu:
     // Setup the stack.
-    movz x0, 0xc, lsl 16
+    .global _stackStart
+    ldr x0, =_stackStart
     mov sp, x0
 
     // Jump to the kernel's main method.

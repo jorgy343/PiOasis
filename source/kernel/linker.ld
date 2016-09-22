@@ -41,8 +41,18 @@ SECTIONS
      * for a total of 512KiB. The minimum addressable byte for the
      * stack is 0x40000 after which it will run into the DTB.
      */
+    . = 0xc0000;
+    _stackStart = .;
 
-    /* Sections we do not need */
+    /*
+     * The heap starts 0x100 bytes after the start of the stack. This
+     * puts the heap start at 0xc0100 and grows towards the high address
+     * space. No maximum size is specified.
+     */
+    . = 0xc0100;
+    _heapStart = .;
+
+    /* Sections we don't need. */
     /DISCARD/ : { *(.iplt*) }
     /DISCARD/ : { *(.rela*) }
     /DISCARD/ : { *(.igot*) }
