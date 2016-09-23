@@ -3,7 +3,7 @@
 // Current EL with SP0
 void HandleException_CurrentElWithSp0_Synchronous()
 {
-    MiniUartWriteString("Current EL with SP0 - Synchronous\r\n");
+    //MiniUartWriteString("Current EL with SP0 - Synchronous\r\n");
 }
 
 void HandleException_CurrentElWithSp0_Irq()

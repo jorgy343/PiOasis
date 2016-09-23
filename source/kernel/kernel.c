@@ -1,4 +1,5 @@
 #include <string.h>
+#include <stdio.h>
 
 #include "standard.h"
 #include "mini-uart.h"
@@ -13,9 +14,7 @@ void main()
     
     MiniUartWriteString("Mini uart initialized\r\n");
 
-    // Unaligned memory access exception on purpose.
-    int* t = (int*)0x1;
-    int q = *t;
-
+    printf("test");
+    MiniUartWriteString("\r\n");
     while (true);
 }

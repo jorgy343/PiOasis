@@ -2,6 +2,7 @@
 #define HANDLE_EXCEPTIONS_H
 
 #include "standard.h"
+#include "gpio.h"
 #include "mini-uart.h"
 
 void HandleException_CurrentElWithSp0_Synchronous();

@@ -45,6 +45,7 @@ _start:
     ldr x0, =0x30c50830
     msr sctlr_el2, x0
 
+    // Move from EL3 into EL1. The kernel will run at EL1.
     mov x0, 0x3c9 // spsr
     msr spsr_el3, x0
     adr x0, el1
@@ -66,9 +67,8 @@ primaryCpu:
     ldr x0, =_stackStart
     mov sp, x0
 
-    // Setup the exception vector for EL2.
+    // Setup the exception handlers for EL1.
     mov x0, 0x200
-    lsl x0, x0, 11
     msr vbar_el1, x0
 
     // Jump to the kernel's main method.

@@ -20,7 +20,7 @@ $(BIN)/kernel.bin: $(OBJ)/kernel.elf
 	$(OBJCOPY) $< -O binary $@
 
 $(OBJ)/kernel.elf: $(OBJFILES)
-	$(LD) -T $(LDFILE) -o $@ $^ ../newlib/libc.a
+	$(CC) $(LDFLAGS) -T $(LDFILE) -o $@ $^ ../newlib/libc.a -lgcc
 
 $(OBJ)/%.o: %.c
 	$(CC) $(CFLAGS) -c $< -o $@
