@@ -5,7 +5,7 @@
 #include "gpio.h"
 #include "mini-uart.h"
 
-void HandleException_CurrentElWithSp0_Synchronous(uint64_t spsr, uint64_t elr, uint64_t esr);
+void HandleException_CurrentElWithSp0_Synchronous();
 void HandleException_CurrentElWithSp0_Irq();
 void HandleException_CurrentElWithSp0_Fiq();
 void HandleException_CurrentElWithSp0_Error();

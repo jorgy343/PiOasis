@@ -30,21 +30,27 @@ _start:
     // Not sure why this is needed yet. It is the virtual timer offset.
     msr cntvoff_el2, xzr
     
+    // Clear all bits in cptr_el3 to disable all trapping to EL3.
+    msr cptr_el3, xzr
+
     // cptr_el3 is used here to prevent traps to EL3.
     mov x0, \
         0x33ff   /* res1 bits. */ |\
-        bit0(10) /* TFP - Clear to not trap FP and SIMD instructions. */ |\
-        bit0(31) /* TCPAC - Clear to not trap access to CPACR_EL1 and CPTR_EL2. */
-    msr cptr_el3, x0
+        bit0(10) /* TFP - Clear to not trap FP and SIMD instructions to EL2. */ |\
+        bit0(20) /* TTA - Clear to not trap trace registers to EL2. */ |\
+        bit0(31) /* TCPAC - Clear to not trap access to CPACR_EL1 and CPTR_EL2 to EL2. */
     msr cptr_el2, x0
-
-    mov x0, (3 << 20)
-    msr cpacr_el1, x0
     
-    // Setup a lot of traps conerning EL3.
+    // Allow EL0 and EL1 to use FP and SIMD instructions.
+    mov x0, \
+        (0x3 << 20) /* FPEN - Set both bits to not trap FP and SIMD instructions to EL1. */ |\
+        bit0(28)    /* TTA - Clear to not trap trace registers to EL1. */
+    
+    // Setup a lot of traps conerning EL3. Note that the kernel at EL1 and the applications
+    // at EL0 will run in secure state to allow access to all of the memory.
     mov x0, \
         0x30     /* res1 bits. */ |\
-        bit1(0)  /* NS - Set to put EL0 and EL1 into non-secure state. */ |\
+        bit0(0)  /* NS - Clear to put EL0 and EL1 into secure state. */ |\
         bit0(1)  /* IRQ - Clear to allow IRQ exceptions to be taken at exception levels other than EL3. */ |\
         bit0(2)  /* FIQ - Clear to allow FIQ exceptions to be taken at exception levels other than EL3. */ |\
         bit0(3)  /* EA - Clear to allow External Abort and SError exceptions to be taken at exception levels other than EL3. */ |\
@@ -67,11 +73,16 @@ _start:
     ldr x0, =0x30c50830
     msr sctlr_el2, x0
 
+    // Setup the exception handlers for EL1. Should this be done for all processors above?
+    mov x0, 0x200
+    msr vbar_el1, x0
+
     // Move from EL3 into EL1. The kernel will run at EL1.
-    mov x0, 0x3cd // spsr
+    mov x0, 0x3c5 // spsr
     msr spsr_el3, x0
     adr x0, el1
     msr elr_el3, x0
+    
     eret
     
 el1:
@@ -88,11 +99,7 @@ primaryCpu:
     .global _stackStart
     ldr x0, =_stackStart
     mov sp, x0
-
-    // Setup the exception handlers for EL1. Should this be done for all processors above?
-    mov x0, 0x200
-    msr vbar_el1, x0
-
+    
     // Jump to the kernel's main method.
     bl main
     

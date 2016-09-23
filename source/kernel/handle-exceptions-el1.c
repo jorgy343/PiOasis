@@ -1,8 +1,16 @@
-#include "handle-exceptions.h"
+#include "handle-exceptions-el1.h"
 
 // Current EL with SP0
-void HandleException_CurrentElWithSp0_Synchronous(uint64_t spsr, uint64_t elr, uint64_t esr)
+void HandleException_CurrentElWithSp0_Synchronous()
 {
+    uint64_t spsr;
+    uint64_t elr;
+    uint64_t esr;
+
+    asm("mrs %[_spsr], spsr_el1" : [_spsr] "=r" (spsr));
+    asm("mrs %[_elr], elr_el1" : [_elr] "=r" (elr));
+    asm("mrs %[_esr], esr_el1" : [_esr] "=r" (esr));
+
     MiniUartWriteString("Current EL with SP0 - Synchronous\r\n");
     MiniUartWriteString("spsr = 0x");
     MiniUartWriteHex64(spsr);
@@ -11,6 +19,8 @@ void HandleException_CurrentElWithSp0_Synchronous(uint64_t spsr, uint64_t elr, u
     MiniUartWriteString("\r\nesr = 0x");
     MiniUartWriteHex64(esr);
     MiniUartWriteString("\r\n");
+
+    while (true);
 }
 
 void HandleException_CurrentElWithSp0_Irq()

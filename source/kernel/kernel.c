@@ -14,6 +14,8 @@ void main()
     
     MiniUartWriteString("Mini uart initialized\r\n");
 
+    asm("svc 123");
+
     //printf("test");
     MiniUartWriteString("\r\n");
     while (true);

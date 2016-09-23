@@ -5,15 +5,7 @@ ExceptionTableStart:
 // Current EL with SP0
 .org 0x0
 Exception_CurrentElWithSp0_Synchronous:
-    // Store x0, x1, and x2 on stack?
-
-    mrs x0, spsr_el1
-    mrs x1, elr_el1
-    mrs x2, esr_el1
-
     bl HandleException_CurrentElWithSp0_Synchronous
-
-    // Restore x0, x1, and x2 on stack?
     eret
 
 .org 0x80
