@@ -1,9 +1,16 @@
 #include "handle-exceptions.h"
 
 // Current EL with SP0
-void HandleException_CurrentElWithSp0_Synchronous()
+void HandleException_CurrentElWithSp0_Synchronous(uint64_t spsr, uint64_t elr, uint64_t esr)
 {
-    //MiniUartWriteString("Current EL with SP0 - Synchronous\r\n");
+    MiniUartWriteString("Current EL with SP0 - Synchronous\r\n");
+    MiniUartWriteString("spsr = 0x");
+    MiniUartWriteHex64(spsr);
+    MiniUartWriteString("\r\nelr = 0x");
+    MiniUartWriteHex64(elr);
+    MiniUartWriteString("\r\nesr = 0x");
+    MiniUartWriteHex64(esr);
+    MiniUartWriteString("\r\n");
 }
 
 void HandleException_CurrentElWithSp0_Irq()

@@ -14,7 +14,7 @@ void main()
     
     MiniUartWriteString("Mini uart initialized\r\n");
 
-    printf("test");
+    //printf("test");
     MiniUartWriteString("\r\n");
     while (true);
 }

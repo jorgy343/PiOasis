@@ -11,7 +11,7 @@ LDFILE = linker.ld
 OBJ = obj
 BIN = bin
 
-SRCFILES = start.S exception-table.S kernel.c mini-uart.c gpio.c newlib-system-calls.c handle-exceptions.c
+SRCFILES = start.S exception-table-el1.S kernel.c mini-uart.c gpio.c newlib-system-calls.c handle-exceptions.c
 OBJFILES = $(addprefix $(OBJ)/, $(patsubst %.c,%.o,$(SRCFILES:.S=.o)))
 
 all: clean dirs $(BIN)/kernel.bin

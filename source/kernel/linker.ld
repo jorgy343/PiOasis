@@ -14,8 +14,8 @@ SECTIONS
     . = 0x200;
     .exceptiontable :
     {
-        obj/exception-table.o(.text)
-        obj/exception-table.o(*)
+        obj/exception-table-el1.o(.text)
+        obj/exception-table-el1.o(*)
     }
 
     . = ALIGN(16);
@@ -64,9 +64,4 @@ SECTIONS
      */
     . = 0xc0100;
     _heapStart = .;
-
-    /* Sections we don't need. */
-    /DISCARD/ : { *(*.iplt*) }
-    /DISCARD/ : { *(*.rela*) }
-    /DISCARD/ : { *(*.igot*) }
 }
