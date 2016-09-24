@@ -45,7 +45,8 @@ _start:
     mov x0, \
         (0x3 << 20) /* FPEN - Set both bits to not trap FP and SIMD instructions to EL1. */ |\
         bit0(28)    /* TTA - Clear to not trap trace registers to EL1. */
-    
+    msr cpacr_el1, x0    
+
     // Setup a lot of traps conerning EL3. Note that the kernel at EL1 and the applications
     // at EL0 will run in secure state to allow access to all of the memory.
     mov x0, \
@@ -68,10 +69,28 @@ _start:
         bit(6) /* SMPEN - Set to enable hardware management of data coherency between the CPU cores. This is a prerequisite for enabling the CPU cache. */
     msr s3_1_c15_c2_1, x0
     
-    // This just sets all of the res1 bits. I'm not convinced this is needed
-    // especially since EL2 will not be used.
-    ldr x0, =0x30c50830
-    msr sctlr_el2, x0
+    // Set some top level controls for both EL0 and EL1.
+    ldr x0, = \
+        0x30d00800 /* res1 bits. */ |\
+        bit0(0)    /* M - Clear to disable address translation. This isn't needed right now. */ |\
+        bit0(1)    /* A - Clear to disable alignment fault checking. This should probably be set. */ |\
+        bit0(2)    /* C - Something about cachebility. It's default reset value is clear so just set it to that right now. */ |\
+        bit0(3)    /* SA - Clear to disable stack alignment checking at EL1. This should probably be set. */ |\
+        bit0(4)    /* SA0 - Clear to disable stack alignment checking at EL0. This should probably be set. */ |\
+        bit0(5)    /* CP15BEN - Just clear it for now. */ |\
+        bit1(7)    /* ITD - Consider it res1. */ |\
+        bit1(8)    /* SED - Consider it res1. */ |\
+        bit0(9)    /* UMA - Clear to prevent EL0 from modifying the DAIF flags. */ |\
+        bit0(12)   /* I - Default is clear so clear it. */ |\
+        bit0(14)   /* DZE - Clear to prevent EL0 from executing DC ZVA instructions. */ |\
+        bit0(15)   /* UCT - Clear to prevent EL0 from accessing ctr_el0. */ |\
+        bit0(16)   /* nTWI - Clear to prevent EL0 from using the wfi instruction. */ |\
+        bit0(18)   /* nTWE - Clear to prevent EL0 from using the wfe instruction. */ |\
+        bit0(19)   /* WXN - Has something to do with XN (Execute Never). Clearing doesn't change anything. */ |\
+        bit0(24)   /* E0E - Clear for little-endian data access. */ |\
+        bit0(25)   /* EE - Clear for little-endian translation table walks. */ |\
+        bit0(26)   /* UCI - Clear to prevent EL0 from executing various cache maintenance instructions. */
+    msr sctlr_el1, x0
 
     // Setup the exception handlers for EL1. Should this be done for all processors above?
     mov x0, 0x200
